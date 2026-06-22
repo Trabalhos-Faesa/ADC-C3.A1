@@ -1,0 +1,164 @@
+[project]
+name = "pic3"
+version = "0.0.1"
+# description = ""
+readme = "README.md"
+requires-python = "~=3.14.0"
+
+
+# MARK: Dependencies
+# uv sync --all-extras --all-groups --no-build-isolation
+# uv lock --upgrade
+# uv export --all-extras --all-groups > requirements.txt
+dependencies = [
+    "nest-asyncio~=1.6",
+
+    # --- Configuration ---
+    "python-decouple~=3.8",
+
+    # --- Data Processing ---
+    # Manipulação de dados
+    "pandas~=3.0",
+    # "numpy~=2.4",
+    # "pyarrow~=24.0",
+
+    # "scipy~=1.17",
+    "statsmodels~=0.14",
+    "scikit-learn~=1.8",
+
+    # --- Data Visualization ---
+    # Geração de gráficos
+    "matplotlib~=3.10",
+    "seaborn~=0.13",
+    "plotly~=6.7",
+
+    # Notebooks e relatórios
+    "jupyter~=1.1",
+    "anywidget~=0.11",
+]
+
+[project.optional-dependencies]
+# uv add <pkg> --optional ci
+ci = [
+    # Static Code Analysis
+    # mypy --install-types
+    # Versão atual do MyPy no VSCode (ext ms-python.mypy-type-checker)
+    # https://github.com/microsoft/vscode-mypy?tab=readme-ov-file#mypy-extension-for-visual-studio-code
+    "mypy~=1.15",
+    "bandit[toml]~=1.9",
+    "ruff~=0.15",
+
+    # Automated Tests
+    "pytest~=9.0",
+    "pytest-asyncio~=1.3",
+    "coverage~=7.14",
+
+    # Stub-only Packages
+    "pandas-stubs~=3.0",
+    "plotly-stubs",
+    "decouple-types",
+
+    # Verificar ausências: exec: rm -rf .mypy_cache && MYPYPATH=src mypy --install-types --namespace-packages --explicit-package-bases .
+]
+
+[dependency-groups]
+# Unlike optional dependencies,
+#   dev dependencies are local-only dependencies,
+#   and will not be included in the project requirements when published to PyPI or other indexes.
+# https://docs.astral.sh/uv/concepts/projects/dependencies/#development-dependencies
+# uv add --group dev <pkg>
+# uv add --dev <pkg>
+dev = [
+    # Automated Tests
+    "pytest-watcher~=0.6",
+]
+
+# [tool.uv]
+# default-groups = "all"
+
+
+# MARK: pytest
+[tool.pytest.ini_options]
+pythonpath = "src"
+# python_files = [
+#     "test.py",
+#     "tests.py",
+#     "test_*.py",
+#     "tests_*.py",
+#     "*_test.py",
+#     "*_tests.py",
+# ]
+addopts = [
+    "--doctest-modules",
+    "--doctest-continue-on-failure",
+    # "--ignore-glob=*/pages/*/main.py",
+    "--import-mode=importlib",
+    "--strict-markers",
+    "-rP",
+    # "-rA",
+]
+markers = [
+    "slow: Slow tests",
+    "architecture: Architecture tests",
+]
+log_level = "WARNING"
+
+
+# MARK: Coverage.py
+[tool.coverage.run]
+branch = true
+omit = [
+    "venv/*",
+    ".venv/*",
+    "*/test.py",
+    "*/tests.py",
+    "*/test_*.py",
+    "*/tests_*.py",
+    "*/*_test.py",
+    "*/*_tests.py",
+]
+
+
+# MARK: Mypy
+[tool.mypy]
+# python_version = "3.13"
+# strict = true
+check_untyped_defs = true
+# https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-paths-to-modules
+# https://mypy.readthedocs.io/en/stable/config_file.html#confval-explicit_package_bases
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src"  # "src"
+namespace_packages = true
+explicit_package_bases = true
+
+[[tool.mypy.overrides]]
+module = [
+    "ipywidgets.*",
+    "pydeck.*",
+    "st_aggrid.*",
+]
+follow_untyped_imports = true
+
+[[tool.mypy.overrides]]
+module = ["h3.*"]
+ignore_missing_imports = true
+
+
+# MARK: Bandit
+[tool.bandit]
+exclude_dirs = [
+    "tests",
+    "*/tests",
+]
+
+
+# MARK: Ruff
+[tool.ruff]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+
+[tool.ruff.lint.per-file-ignores]
+"*.ipynb" = ["F405"]

@@ -1,0 +1,73 @@
+{
+    // "python.defaultInterpreterPath": "/bin/python",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    // "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "python-envs.defaultEnvManager": "ms-python.python:venv",
+    // "python-envs.pythonProjects": [],
+    "python.analysis.extraPaths": ["./src"],
+    // "python.envFile": "${workspaceFolder}/.env",
+    // "terminal.integrated.env.linux": {
+    //     "PYTHONPATH": "${workspaceFolder}/src",
+    // },
+    // "terminal.integrated.env.windows": {
+    //     "PYTHONPATH": "${workspaceFolder}\\src",
+    // },
+    "python.analysis.typeCheckingMode": "off",
+    "mypy-type-checker.importStrategy": "fromEnvironment",
+    // "mypy-type-checker.path": ["mypy"],
+    // "mypy-type-checker.args": [],
+    "bandit.args": [
+        "-c",
+        "pyproject.toml"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [], // -x to bail
+    "code-runner.executorMap": {
+        "python": ".venv/bin/python -u"
+        // "python": ".venv\\Scripts\\python.exe -u"
+    },
+    "cSpell.words": [
+        "aioodbc",
+        "bargap",
+        "botao",
+        "cargs",
+        "celula",
+        "choropleth",
+        "Choroplethmap",
+        "coloraxis",
+        "CONNECTIONSTRING",
+        "cparams",
+        "currentvalue",
+        "DBAPI",
+        "ecdf",
+        "exptoken",
+        "featureidkey",
+        "geopandas",
+        "granularmente",
+        "histnorm",
+        "hoverinfo",
+        "ipywidgets",
+        "latlng",
+        "legendgroup",
+        "legendonly",
+        "matplotlib",
+        "msodbcsql",
+        "nbins",
+        "plotly",
+        "pyarrow",
+        "pyodbc",
+        "Scattermap",
+        "showlegend",
+        "SOLICITACAO",
+        "streamlit",
+        "tokenb",
+        "tokenstruct",
+        "usuarios",
+        "USUARIOS",
+        "xanchor",
+        "xaxis",
+        "yanchor",
+        "yaxis"
+    ]
+}
