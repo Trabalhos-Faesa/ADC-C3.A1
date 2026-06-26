@@ -58,8 +58,19 @@ ci = [
     "pandas-stubs~=3.0",
     "plotly-stubs",
     "decouple-types",
+    "scikit-learn-stubs ",
 
     # Verificar ausências: exec: rm -rf .mypy_cache && MYPYPATH=src mypy --install-types --namespace-packages --explicit-package-bases .
+    # On PowerShell: rm -Force .mypy_cache ; $env:MYPYPATH="src" ; uv run mypy --install-types --namespace-packages --explicit-package-bases .
+    "scipy-stubs",
+    "types-Pygments",
+    "types-colorama",
+    "types-defusedxml",
+    "types-jsonschema",
+    "types-openpyxl",
+    "types-python-dateutil",
+    "types-seaborn",
+    "types-xlrd",
 ]
 
 [dependency-groups]
