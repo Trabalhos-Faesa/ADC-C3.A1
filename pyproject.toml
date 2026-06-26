@@ -25,6 +25,7 @@ dependencies = [
     # "scipy~=1.17",
     "statsmodels~=0.14",
     "scikit-learn~=1.8",
+    "mlxtend~=0.25",
 
     # --- Data Visualization ---
     # Geração de gráficos
